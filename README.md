@@ -2,6 +2,10 @@ This project is forked from [Neural Implicit Flow (NIF)](https://github.com/pswp
 
 # Pruned Neural Implicit Flow (pNIF)
 
+NIF has a hypernet structure made up of two MLP networks called ShapeNet and ParameterNet. 
+
+
+![This is an image!](pNIF/figs/nif.jpg)
 
    ```
 @article{pan2022neural,
