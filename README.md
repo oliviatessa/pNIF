@@ -4,11 +4,13 @@ This project is forked from [Neural Implicit Flow (NIF)](https://github.com/pswp
 
 ## NIF Background
 
-NIF has a hypernetwork structure made up of two MLP networks called ShapeNet and ParameterNet. The weights and biases of ShapeNet are determined entirely by the output of ParameterNet. In other words, ParameterNet learns the parameters needed for spatial recondstruction of the field. 
+NIF has a hypernetwork structure made up of two MLP networks called ShapeNet and ParameterNet. The weights and biases of ShapeNet are determined entirely by the output of ParameterNet. In other words, ParameterNet learns the parameters needed for spatial reconstruction of the flow field. 
 
 | ![nif_structure](figs/nif.jpg) | 
 |:--:| 
 | *Hypernetwork structure of NIF [[1]](#1)* |
+
+NIF is built using Keras subclassing methods and TensorFlow 2.x. This allows the user to use built-in Keras compiling, training, and evaluation functions on a NIF model. A NIF model with pruning functionality, called pNIF, is also compatible with the above Keras functions. 
 
 ## Pruning NIF 
 
