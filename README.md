@@ -1,3 +1,9 @@
+This project is forked from ![Neural Implicit Flow (NIF)] (https://github.com/pswpswpsw/nif#neural-implicit-flow-nif-mesh-agnostic-dimensionality-reduction)
+
+
+
+
+
 # Neural Implicit Flow (NIF): mesh-agnostic dimensionality reduction
 ![example workflow](https://github.com/pswpswpsw/nif/workflows/Tests/badge.svg)
 [![License](https://img.shields.io/github/license/pswpswpsw/nif)](https://github.com/pswpswpsw/nif/blob/master/LICENSE)
