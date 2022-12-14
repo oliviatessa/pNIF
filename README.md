@@ -1,10 +1,6 @@
-This project is forked from [Neural Implicit Flow (NIF)](https://github.com/pswpswpsw/nif#neural-implicit-flow-nif-mesh-agnostic-dimensionality-reduction) : mesh-agnostic dimensionality reduction by [Shaowu Pan](http://www.shaowupan.com/). Please see [paper](https://arxiv.org/pdf/2204.03216.pdf) for details on NIF. 
+This project is forked from [Neural Implicit Flow (NIF)](https://github.com/pswpswpsw/nif#neural-implicit-flow-nif-mesh-agnostic-dimensionality-reduction) by [Shaowu Pan](http://www.shaowupan.com/). NIF is a mesh-agnostic, dimensionality reduction paradigm for modeling complex spatio-temporal fields. NIF has a hypernet structure that isolates the spatial complexity from the parameter (time, Reynold's number, etc.) complexity. For more details on NIF, please see this [paper](https://arxiv.org/pdf/2204.03216.pdf).
 
-
-
-
-
-# Pruned Neural Implicit Flow (pNIF): mesh-agnostic dimensionality reduction
+# Pruned Neural Implicit Flow (pNIF)
 
 <p align="center">
   <img src="./misc/myimage.gif" alt="animated" />
