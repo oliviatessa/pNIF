@@ -10,7 +10,7 @@ NIF has a hypernetwork structure made up of two MLP networks called ShapeNet and
 |:--:| 
 | *Hypernetwork structure of NIF [[1]](#1)* |
 
-NIF is built using Keras subclassing methods and TensorFlow 2.x. This allows the user to use built-in Keras compiling, training, and evaluation functions on a NIF model. A NIF model with pruning functionality, called pNIF, is also compatible with the above Keras functions. 
+NIF is built using **Keras** subclassing methods and **TensorFlow 2.x**. This allows the user to use built-in Keras compiling, training, and evaluation functions on a NIF model. A NIF model with pruning functionality, called pNIF, is also compatible with the above Keras functions. 
 
 ## Pruning NIF 
 
