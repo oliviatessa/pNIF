@@ -11,6 +11,7 @@ from .layers import MLP_ResNet
 from .layers import MLP_SimpleShortCut
 from .layers import JacRegLatentLayer
 from .layers import EinsumLayer
+from .layers import MaskLayer
 
 
 class NIF(object):
@@ -304,6 +305,104 @@ class NIF(object):
             ],
         )
 
+class PNIF(NIF):
+    def __init__(self, cfg_shape_net, cfg_parameter_net, mixed_policy):
+        super(PNIF, self).__init__(cfg_shape_net, cfg_parameter_net, mixed_policy)
+
+        # initialize the mask structure
+        self.mask_list = self._initialize_masks()
+
+    def call(self, inputs, training=None, mask=None):
+        input_p = inputs[:, 0:self.pi_dim]
+        input_s = inputs[:, self.pi_dim:self.pi_dim+self.si_dim]
+        # get parameter from parameter_net
+        self.pnet_output = self._call_parameter_net(input_p, self.pnet_list, self.mask_list)[0]
+        return self._call_shape_net(tf.cast(input_s,self.compute_Dtype),
+                                    self.pnet_output,
+                                    si_dim=self.si_dim,
+                                    so_dim=self.so_dim,
+                                    n_sx=self.n_sx,
+                                    l_sx=self.l_sx,
+                                    activation=self.cfg_shape_net['activation'],
+                                    variable_dtype=self.variable_Dtype)
+
+    def _initialize_masks(self):
+        '''
+        Initializes list of masks that will be inserted into pnet_list.
+        '''
+        mask_list = []
+
+        input_mask = MaskLayer(self.pi_dim, self.n_st)
+        mask_list.append(input_mask)
+        
+    def call(self, inputs, training=None, mask=None):
+        input_p = inputs[:, 0:self.pi_dim]
+        input_s = inputs[:, self.pi_dim:self.pi_dim+self.si_dim]
+        # get parameter from parameter_net
+        self.pnet_output = self._call_parameter_net(input_p, self.pnet_list)[0]
+        return self._call_shape_net(tf.cast(input_s,self.compute_Dtype),
+                                    self.pnet_output,
+                                    si_dim=self.si_dim,
+                                    so_dim=self.so_dim,
+                                    n_sx=self.n_sx,
+                                    l_sx=self.l_sx,
+                                    activation=self.cfg_shape_net['activation'],
+                                    variable_dtype=self.variable_Dtype)
+
+    def _initialize_pnet(self, cfg_parameter_net, cfg_shape_net):
+        # just simple implementation of a shortcut connected parameter net with a similar shapenet
+        self.po_dim = (self.l_sx)*self.n_sx**2 + (self.si_dim + self.so_dim + 1 + self.l_sx)*self.n_sx + self.so_dim
+
+        # construct parameter_net
+        pnet_layers_list = []
+        # 1. first layer
+        layer_1 = MaskLayer(self.pi_dim, self.n_st, cfg_parameter_net['activation'],
+                        kernel_initializer=initializers.TruncatedNormal(stddev=0.1),
+                        bias_initializer=initializers.TruncatedNormal(stddev=0.1))
+        pnet_layers_list.append(layer_1)
+
+        # 2. hidden layer
+        for i in range(self.l_st):
+            tmp_layer = MaskLayer(self.n_st, self.n_st, cfg_parameter_net['activation'],
+                                           kernel_initializer=initializers.TruncatedNormal(stddev=0.1),
+                                           bias_initializer=initializers.TruncatedNormal(stddev=0.1))
+            # identity_layer = Lambda(lambda x: x)
+            # tmp_layer =tf.keras.layers.Add()(identity_layer,tmp_layer)
+            pnet_layers_list.append(tmp_layer)
+
+        # 3. bottleneck layer
+        bottleneck_layer = MaskLayer(self.n_st, self.pi_hidden, activation=None,
+                                 kernel_initializer=initializers.TruncatedNormal(stddev=0.1),
+                                 bias_initializer=initializers.TruncatedNormal(stddev=0.1))
+        pnet_layers_list.append(bottleneck_layer)
+
+        # 4. last layer
+        last_layer = MaskLayer(self.pi_hidden, self.po_dim, activation=None,
+                           kernel_initializer=initializers.TruncatedNormal(stddev=0.1),
+                           bias_initializer=initializers.TruncatedNormal(stddev=0.1))
+        pnet_layers_list.append(last_layer)
+
+        return pnet_layers_list
+    
+    def update_masks(self, sparsity):
+        '''
+        Add keyword like "Magnitude" to choose which type of pruning you want to do 
+        '''
+        for layer in self.pnet_list[:-1]:
+            #omit last layer because it is not prunable 
+            layer.pruneLowMagnitude(sparsity)
+          
+        
+        self.pnet_list[-1].pruneShapeNet(sparsity, self.si_dim, self.n_sx, self.l_sx, self.so_dim)
+            
+        '''
+        Make loop that does model.fit for however many times we want to prune
+        call ori_model.update_masks each time 
+        '''
+
+    def call(self, inputs):
+        #Perform element-wise multiplication
+        return tf.multiply(inputs, self.mask)
 
 class NIFMultiScale(NIF):
     def __init__(self, cfg_shape_net, cfg_parameter_net, mixed_policy="float32"):

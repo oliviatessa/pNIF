@@ -10,6 +10,7 @@ from nif.layers.regularization import ParameterOutputL1ActReg
 from nif.layers.siren import HyperLinearForSIREN
 from nif.layers.siren import SIREN
 from nif.layers.siren import SIREN_ResNet
+from nif.layers.masklayer import MaskLayer
 
 __all__ = [
     "SIREN",
@@ -23,4 +24,5 @@ __all__ = [
     "HessianLayer",
     "ParameterOutputL1ActReg",
     "EinsumLayer",
+    "MaskLayer"
 ]
