@@ -8,7 +8,9 @@ NIF has a hypernet structure made up of two MLP networks called ShapeNet and Par
 ![This is an image!](figs/nif.jpg)
 *caption [[1]](#1)*
 
-
+| ![nif_structure](figs/nif.jpg) | 
+|:--:| 
+| *caption [[1]](#1)* |
 
 ## References
 <a id="1">[1]</a> 
