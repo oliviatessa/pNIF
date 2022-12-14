@@ -1,4 +1,4 @@
-This project is forked from [Neural Implicit Flow (NIF)] (https://github.com/pswpswpsw/nif#neural-implicit-flow-nif-mesh-agnostic-dimensionality-reduction)
+This project is forked from [Neural Implicit Flow (NIF)](https://github.com/pswpswpsw/nif#neural-implicit-flow-nif-mesh-agnostic-dimensionality-reduction)
 
 
 
