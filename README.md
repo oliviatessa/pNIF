@@ -4,9 +4,7 @@ This project is forked from [Neural Implicit Flow (NIF)](https://github.com/pswp
 
 
 
-# Neural Implicit Flow (NIF): mesh-agnostic dimensionality reduction
-![example workflow](https://github.com/pswpswpsw/nif/workflows/Tests/badge.svg)
-[![License](https://img.shields.io/github/license/pswpswpsw/nif)](https://github.com/pswpswpsw/nif/blob/master/LICENSE)
+# Pruned Neural Implicit Flow (pNIF): mesh-agnostic dimensionality reduction
 
 <p align="center">
   <img src="./misc/myimage.gif" alt="animated" />
