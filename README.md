@@ -2,7 +2,7 @@ This project is forked from [Neural Implicit Flow (NIF)](https://github.com/pswp
 
 # Pruned Neural Implicit Flow (pNIF)
 
-NIF has a hypernetwork structure made up of two MLP networks called ShapeNet and ParameterNet. 
+NIF has a hypernetwork structure made up of two MLP networks called ShapeNet and ParameterNet. The weights and biases of ShapeNet are determined entirely by the output of ParameterNet. In other words, ParameterNet learns the parameters needed for spatial recondstruction of the field. 
 
 | ![nif_structure](figs/nif.jpg) | 
 |:--:| 
