@@ -6,12 +6,10 @@ NIF has a hypernet structure made up of two MLP networks called ShapeNet and Par
 
 
 ![This is an image!](figs/nif.jpg)
+*caption [[1]](#1)*
 
-   ```
-@article{pan2022neural,
-  title={Neural Implicit Flow: a mesh-agnostic dimensionality reduction paradigm of spatio-temporal data},
-  author={Pan, Shaowu and Brunton, Steven L and Kutz, J Nathan},
-  journal={arXiv preprint arXiv:2204.03216},
-  year={2022}
-}
-   ```
+
+
+## References
+<a id="1">[1]</a> 
+Pan, Shaowu, Steven L Brunton, and J. Nathan Kutz. “Neural Implicit Flow: a mesh-agnostic dimensionality reduction paradigm of spatio-temporal data.” arXiv preprint arXiv:2204.03216 (2022).
