@@ -16,7 +16,15 @@ NIF is built using **Keras** subclassing methods and **TensorFlow 2.x**. This al
 
 ## Pruning NIF 
 
-in the case of ... where reducing the size of ShapeNet will be particularly advantageous. 
+Model compression is important for modeling high-dimensional flow fields. For example, the authors use NIF to reconstruct the forced isotropic turbulence dataset from JHU Turbulence dataset [[2]](#2) with Taylor-scale Reynolds number around 433. The authors highlight that the total number of parameters required by NIF are just 3% the total original dataset array size. This can be further reduced by neural network pruning. Neural network pruning reduces model size by systematically removing parameters from a network. In the case of high-dimensional datasets, removing parameters from ShapeNet, and therefore reducing its memory footprint, will be particularly advantageous. 
+
 ## References
 <a id="1">[1]</a> 
 Pan, Shaowu, Steven L Brunton, and J. Nathan Kutz. “Neural Implicit Flow: a mesh-agnostic dimensionality reduction paradigm of spatio-temporal data.” arXiv preprint arXiv:2204.03216 (2022). https://arxiv.org/pdf/2204.03216.pdf
+
+<a id="2">[2]</a>
+Li, Yi, Eric Perlman, Minping Wan, Yunke Yang, Charles Meneveau, Randal Burns, Shiyi
+Chen, Alexander Szalay, and Gregory Eyink. "A public turbulence database cluster and
+applications to study lagrangian evolution of velocity increments in turbulence." Journal
+of Turbulence, 9:N31, 2008. doi: 10.1080/14685240802376389. URL https://doi.org/
+10.1080/14685240802376389.
