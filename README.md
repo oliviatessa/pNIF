@@ -10,10 +10,13 @@ NIF has a hypernetwork structure made up of two MLP networks called ShapeNet and
 |:--:| 
 | *Hypernetwork structure of NIF [[1]](#1)* |
 
+In [[1]](#1), the authors demonstrate that NIF is capable of scalable, 3D nonlinear dimensionality reduction on spatio-temporal datasets. NIF outperforms both linear and non-linear dimensionality techniques. In terms of CPU time and memory, it outperforms a generic feed-forward network. 
+
 NIF is built using **Keras** subclassing methods and **TensorFlow 2.x**. This allows the user to use built-in Keras compiling, training, and evaluation functions on a NIF model. A NIF model with pruning functionality, called pNIF, is also compatible with the above Keras functions. 
 
 ## Pruning NIF 
 
+in the case of ... where reducing the size of ShapeNet will be particularly advantageous. 
 ## References
 <a id="1">[1]</a> 
 Pan, Shaowu, Steven L Brunton, and J. Nathan Kutz. “Neural Implicit Flow: a mesh-agnostic dimensionality reduction paradigm of spatio-temporal data.” arXiv preprint arXiv:2204.03216 (2022). https://arxiv.org/pdf/2204.03216.pdf
