@@ -16,7 +16,11 @@ NIF is built using **Keras** subclassing methods and **TensorFlow 2.x**. This al
 
 ## Pruning NIF 
 
-Model compression is important for modeling high-dimensional flow fields. For example, the authors use NIF to reconstruct the forced isotropic turbulence dataset from JHU Turbulence dataset [[2]](#2) with Taylor-scale Reynolds number around 433. The authors highlight that the total number of parameters required by NIF are just 3% the total original dataset array size. This can be further reduced by neural network pruning. Neural network pruning reduces model size by systematically removing parameters from a network. In the case of high-dimensional datasets, removing parameters from ShapeNet, and therefore reducing its memory footprint, will be particularly advantageous. 
+Model compression is important for modeling high-dimensional flow fields. For example, the authors use NIF to reconstruct the forced isotropic turbulence dataset from JHU Turbulence dataset [[2]](#2) with Taylor-scale Reynolds number around 433. The authors highlight that the total number of parameters required by NIF are just 3% the total original dataset array size. This can be further reduced by neural network pruning. Neural network pruning reduces model size by systematically removing parameters from a network.
+
+Here, we use the method of neural network pruning to reduce the size of NIF and further increase its compressibility. Since ShapeNet is typically much larger than ParameterNet, removing parameters from ShapeNet, and therefore reducing its memory footprint, will be particularly advantageous. We first train a fully-connected NIF model to a minimum error. Next we use the neural network nodal pruning to promote sparsity between the layers of ShapeNet. A target sparsity (percentage of pruned ShapeNet nodes) is specified and the nodes with the smallest L2 norms are forced to zero. The network is then retrained until a minimum error is reached. This process is repeated until most of the weights have been pruned from the network.
+
+TensorFlow's toolkit called the [Model Optimization Toolkit](https://www.tensorflow.org/model_optimization/guide/pruning/comprehensive_guide.md) contains functions for pruning deep neural networks. In the Model Optimization Toolkit, pruning is achieved through the use of binary masking layers that are multiplied element-wise to each weight matrix in the network. Pruning with masking layers forces parameters to zero and does not allow them to regain magnitude upon retraining. 
 
 ## References
 <a id="1">[1]</a> 
