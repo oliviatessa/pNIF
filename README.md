@@ -6,7 +6,7 @@ Here, we use the method of neural network pruning to further reduce the computat
 
 ## NIF Background
 
-NIF has a hypernetwork structure made up of two multi-layer perceptron (MLP) networks called ShapeNet and ParameterNet. The weights and biases of ShapeNet are determined entirely by the output of ParameterNet. In other words, ParameterNet learns the parameters needed for spatial reconstruction of the flow field. 
+NIF has a hypernetwork structure made up of two multi-layer perceptron (MLP) networks called ShapeNet and ParameterNet. The weights and biases of ShapeNet are determined entirely by the output of ParameterNet. In other words, ParameterNet learns the parameters needed for spatial reconstruction of the flow field with point-wise spatial inputs. 
 
 | ![nif_structure](figs/nif.jpg) | 
 |:--:| 
