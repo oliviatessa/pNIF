@@ -23,9 +23,9 @@ Here, we use the method of neural network pruning to reduce the size of NIF and 
 TensorFlow's toolkit called the [Model Optimization Toolkit](https://www.tensorflow.org/model_optimization/guide/pruning/comprehensive_guide.md) contains functions for pruning deep neural networks. In the Model Optimization Toolkit, pruning is achieved through the use of binary masking layers that are multiplied element-wise to each weight matrix in the network. Pruning with masking layers forces parameters to zero and does not allow them to regain magnitude upon retraining. However, do to NIF's hypernetwork structure, we are implementing pruning via a single masking layer over the output of ParameterNet. 
 
 
-| ![nif_structure](figs/nif.jpg) | 
+| ![nif_structure](figs/pnif_fig.jpg) | 
 |:--:| 
-| *Hypernetwork structure of NIF [[1]](#1)* |
+| *Pruning NIF* |
 
 ## References
 <a id="1">[1]</a> 
