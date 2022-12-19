@@ -20,12 +20,14 @@ Model compression is important for modeling high-dimensional flow fields. For ex
 
 Here, we use the method of neural network pruning to reduce the size of NIF and further increase its compressibility. Since ShapeNet is typically much larger than ParameterNet, removing parameters from ShapeNet, and therefore reducing its memory footprint, will be particularly advantageous. We first train a fully-connected NIF model to a minimum error. Next we use the neural network nodal pruning to promote sparsity between the layers of ShapeNet. A target sparsity (percentage of pruned ShapeNet nodes) is specified and the nodes with the smallest L2 norms are forced to zero. The network is then retrained until a minimum error is reached. This process is repeated until most of the weights have been pruned from the network.
 
-TensorFlow's toolkit called the [Model Optimization Toolkit](https://www.tensorflow.org/model_optimization/guide/pruning/comprehensive_guide.md) contains functions for pruning deep neural networks. In the Model Optimization Toolkit, pruning is achieved through the use of binary masking layers that are multiplied element-wise to each weight matrix in the network. Pruning with masking layers forces parameters to zero and does not allow them to regain magnitude upon retraining. However, do to NIF's hypernetwork structure, we are implementing pruning via a single masking layer over the output of ParameterNet. 
+TensorFlow's toolkit called the [Model Optimization Toolkit](https://www.tensorflow.org/model_optimization/guide/pruning/comprehensive_guide.md) contains functions for pruning deep neural networks. In the Model Optimization Toolkit, pruning is achieved through the use of binary masking layers that are multiplied element-wise to each weight matrix in the network. Pruning with masking layers forces parameters to zero and does not allow them to regain magnitude upon retraining. However, due to NIF's hypernetwork structure, we are implementing pruning via a single masking layer over the output of ParameterNet. 
 
 
 | ![nif_structure](figs/pnif_fig.jpg) | 
 |:--:| 
-| *Pruning NIF* |
+| *Pruning output of ParameterNet in order to reduce the size of ShapeNet.* |
+
+The parameters of ShapeNet are completely determined by the output of ParameterNet. We are implementing pruning of ShapeNet via a mask over the output of ParameterNet. To effectively reduce the size of ShapeNet, we are using nodal pruning (as opposed to weight pruning), such that entire nodes of ShapeNet are removed. 
 
 ## References
 <a id="1">[1]</a> 
